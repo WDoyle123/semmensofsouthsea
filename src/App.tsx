@@ -1,8 +1,22 @@
 import { useMemo, useState } from "react";
+import type { CSSProperties, JSX } from "react";
 import ContactFormOverlay from "./components/ContactFormOverlay";
 import "./App.css";
 
-const SERVICE_COPY = {
+/** The single source of truth for service names */
+const SERVICE_NAMES = [
+  "MOT",
+  "Services",
+  "Repairs",
+  "Tyres",
+  "Engine Diagnostics",
+  "Steering and Suspension",
+] as const;
+
+type ServiceKey = (typeof SERVICE_NAMES)[number];
+
+/** Copy and icons typed by the ServiceKey union */
+const SERVICE_COPY: Record<ServiceKey, string> = {
   MOT: "DVSA-approved MOT testing for Class 4 vehicles. Pre-checks, advisories explained plainly, and same-day retests where applicable.",
   Services:
     "Interim and full servicing using OEM-spec parts and oils. Digital service records updated where supported.",
@@ -16,7 +30,7 @@ const SERVICE_COPY = {
     "Shocks, springs, bushings, track rods and geometry checks to keep the ride safe and precise.",
 };
 
-const ICONS = {
+const ICONS: Record<ServiceKey, JSX.Element> = {
   MOT: (
     <svg viewBox="0 0 24 24" className="w-6 h-6">
       <path
@@ -97,14 +111,20 @@ const ICONS = {
   ),
 };
 
-function classNames(...v) {
-  return v.filter(Boolean).join(" ");
+/** Typed helper with a proper type guard so filter(Boolean) is safe */
+function classNames(...v: Array<string | false | null | undefined>) {
+  return v.filter((x): x is string => Boolean(x)).join(" ");
 }
 
+/** Helper to allow CSS custom properties in inline style */
+type CSSVar = CSSProperties & Record<string, string | number>;
+
 export default function App() {
-  const [activeService, setActiveService] = useState("MOT");
+  const [activeService, setActiveService] = useState<ServiceKey>("MOT");
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const services = useMemo(() => Object.keys(SERVICE_COPY), []);
+
+  // Derive strongly-typed keys from the literal list
+  const services = useMemo<ServiceKey[]>(() => [...SERVICE_NAMES], []);
 
   return (
     <>
@@ -267,7 +287,7 @@ export default function App() {
               key={s}
               className={classNames(
                 "tab whitespace-nowrap",
-                activeService === s && "tab-active",
+                activeService === s && "tab-active"
               )}
               onClick={() => setActiveService(s)}
             >
@@ -341,7 +361,7 @@ export default function App() {
             Why choose Semmens of Southsea?
           </h2>
 
-          <div className="mt-8 grid md:grid-cols-3 gap-6">
+        <div className="mt-8 grid md:grid-cols-3 gap-6">
             <div className="card bg-base-100 shadow-lg">
               <div className="card-body">
                 <h3 className="card-title">Accurate diagnostics</h3>
@@ -351,7 +371,7 @@ export default function App() {
                 </p>
                 <div
                   className="mt-4 radial-progress"
-                  style={{ "--value": 100 }}
+                  style={{ "--value": 100 } as CSSVar}
                   role="progressbar"
                   aria-label="Diagnostic accuracy"
                 >
@@ -362,7 +382,7 @@ export default function App() {
 
             <div className="card bg-base-100 shadow-lg">
               <div className="card-body">
-                <h3 className="card-title">Clear & fair pricing</h3>
+                <h3 className="card-title">Clear &amp; fair pricing</h3>
                 <p className="opacity-80">
                   Estimates given up-front, with your approval before any work
                   begins.
@@ -378,7 +398,7 @@ export default function App() {
 
             <div className="card bg-base-100 shadow-lg">
               <div className="card-body">
-                <h3 className="card-title">Trusted parts & service</h3>
+                <h3 className="card-title">Trusted parts &amp; service</h3>
                 <p className="opacity-80">
                   We only use quality OEM or equivalent parts, keeping your
                   vehicle safe and warranty intact.
@@ -470,7 +490,7 @@ export default function App() {
                   <iframe
                     title="Semmens of Southsea — map"
                     className="absolute inset-0 w-full h-full"
-                    frameBorder="0"
+                    frameBorder={0}
                     scrolling="no"
                     marginHeight={0}
                     marginWidth={0}
@@ -507,3 +527,4 @@ export default function App() {
     </>
   );
 }
+
