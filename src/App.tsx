@@ -3,7 +3,6 @@ import type { CSSProperties, JSX } from "react";
 import ContactFormOverlay from "./components/ContactFormOverlay";
 import "./App.css";
 
-/** The single source of truth for service names */
 const SERVICE_NAMES = [
   "MOT",
   "Services",
@@ -15,7 +14,6 @@ const SERVICE_NAMES = [
 
 type ServiceKey = (typeof SERVICE_NAMES)[number];
 
-/** Copy and icons typed by the ServiceKey union */
 const SERVICE_COPY: Record<ServiceKey, string> = {
   MOT: "DVSA-approved MOT testing for Class 4 vehicles. Pre-checks, advisories explained plainly, and same-day retests where applicable.",
   Services:
@@ -111,12 +109,10 @@ const ICONS: Record<ServiceKey, JSX.Element> = {
   ),
 };
 
-/** Typed helper with a proper type guard so filter(Boolean) is safe */
 function classNames(...v: Array<string | false | null | undefined>) {
   return v.filter((x): x is string => Boolean(x)).join(" ");
 }
 
-/** Helper to allow CSS custom properties in inline style */
 type CSSVar = CSSProperties & Record<string, string | number>;
 
 export default function App() {
