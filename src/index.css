@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: emerald --default;
+}
+
+/* subtle animated gradient for hero bg */
+@keyframes gradientShift {
+  0% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(-5%, -3%, 0) scale(1.05); }
+  100% { transform: translate3d(0,0,0) scale(1); }
+}
+.animate-gradient {
+  animation: gradientShift 18s ease-in-out infinite;
+}
+
