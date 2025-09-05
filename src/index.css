@@ -1,7 +1,21 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
 @plugin "daisyui/theme" {
   name: "emerald";
   default: true;
   --color-primary: #3a4572;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+body {
+  -ms-overflow-style: none;
 }

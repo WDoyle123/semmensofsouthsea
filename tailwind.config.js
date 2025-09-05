@@ -2,7 +2,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
-  theme: { extend: {} },
+  theme: {
+    extend: {
+      screens: {
+        "3xl": "1920px",
+        "4xl": "2560px", 
+      },
+    },
+  },
   plugins: [require("daisyui")],
   daisyui: {
     themes: [
@@ -20,4 +27,3 @@ module.exports = {
     ],
   },
 };
-

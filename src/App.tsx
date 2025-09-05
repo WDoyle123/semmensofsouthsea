@@ -1,7 +1,6 @@
 import { useMemo, useState, useEffect, useRef } from "react";
 import type { CSSProperties, JSX } from "react";
 import CircleType from "circletype";
-;
 import ContactFormOverlay from "./components/ContactFormOverlay";
 import "./App.css";
 
@@ -216,11 +215,11 @@ export default function App() {
               aria-hidden="true"
               className="
       pointer-events-none select-none filter invert
-      absolute bottom-[17.5rem] left-[0rem]
+      absolute bottom-[17.5rem] left-[-1rem]
       w-[clamp(180px,35vw,520px)]     
       md:bottom-[19rem] md:right-[-1rem]
-      lg:bottom-[5rem] lg:left-[1rem]
-      object-contain
+      lg:bottom-[5rem] lg:left-[1rem] xl:left-[4rem] 2xl:left-[8rem] 
+              object-contain
     "
             />
 
@@ -252,7 +251,7 @@ export default function App() {
 
             <div className="mt-6 sm:mt-8 stats stats-horizontal shadow-xl bg-base-100/70 backdrop-blur scale-100">
               <div className="stat px-2 sm:px-4">
-                <div className="stat-title text-xs sm:text-sm">
+                <div className="stat-title font-bold text-xs sm:text-sm">
                   Customer rating
                 </div>
                 <a
@@ -264,21 +263,25 @@ export default function App() {
                 >
                   4.9⭐
                 </a>{" "}
-                <div className="stat-desc text-[10px] sm:text-xs">
+                <div className="stat-desc text-[10px] font-bold sm:text-xs">
                   Local &amp; repeat business
                 </div>
               </div>
               <div className="stat px-2 sm:px-4">
-                <div className="stat-title text-xs sm:text-sm">Turnaround</div>
+                <div className="stat-title text-xs sm:text-sm font-bold">
+                  Turnaround
+                </div>
                 <div className="stat-value text-lg sm:text-2xl">Same-day</div>
-                <div className="stat-desc text-[10px] sm:text-xs">
+                <div className="stat-desc text-[10px] sm:text-xs font-bolt">
                   Where applicable
                 </div>
               </div>
               <div className="stat px-2 sm:px-4">
-                <div className="stat-title text-xs sm:text-sm">Guarantee</div>
+                <div className="stat-title text-xs sm:text-sm font-bold">
+                  Guarantee
+                </div>
                 <div className="stat-value text-lg sm:text-2xl">12 mo</div>
-                <div className="stat-desc text-[10px] sm:text-xs">
+                <div className="stat-desc text-[10px] sm:text-xs font-bold">
                   Parts &amp; labour
                 </div>
               </div>
@@ -313,17 +316,22 @@ export default function App() {
         </div>
 
         <div className="mt-6">
-          <div className="border border-base-300 bg-base-100 shadow-xl">
+          <div className="border border-base-300 bg-base-100 shadow-xl overflow-hidden">
             <div className="px-6 py-8">
-              <div className="flex items-start gap-4">
-                <div className="btn btn-circle btn-secondary btn-outline">
+              <div className="flex flex-col sm:flex-row items-start gap-4">
+                <div className="btn btn-circle btn-secondary btn-outline shrink-0">
                   {ICONS[activeService]}
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold">{activeService}</h3>
-                  <p className="opacity-80 mt-1 max-w-3xl">
+
+                {/* Allow this column to shrink and wrap text */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-2xl font-bold break-words">
+                    {activeService}
+                  </h3>
+                  <p className="opacity-80 mt-1 max-w-3xl break-words">
                     {SERVICE_COPY[activeService]}
                   </p>
+
                   <div className="mt-4 flex flex-wrap gap-2">
                     <span className="badge badge-outline">OEM-spec parts</span>
                     <span className="badge badge-outline">Clear pricing</span>
@@ -331,11 +339,19 @@ export default function App() {
                       Same-day when possible
                     </span>
                   </div>
-                  <div className="mt-6 flex gap-3">
-                    <a href="#contact" className="btn btn-secondary">
+
+                  {/* Let buttons wrap and fit the container */}
+                  <div className="mt-6 flex flex-wrap gap-3 min-w-0">
+                    <a
+                      href="#contact"
+                      className="btn btn-secondary w-full sm:w-auto max-w-full whitespace-normal break-words"
+                    >
                       Book {activeService}
                     </a>
-                    <a href="#contact" className="btn btn-outline">
+                    <a
+                      href="#contact"
+                      className="btn btn-outline w-full sm:w-auto max-w-full whitespace-normal break-words"
+                    >
                       Ask a question
                     </a>
                   </div>
