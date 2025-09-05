@@ -1,5 +1,7 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import type { CSSProperties, JSX } from "react";
+import CircleType from "circletype";
+;
 import ContactFormOverlay from "./components/ContactFormOverlay";
 import "./App.css";
 
@@ -119,7 +121,12 @@ export default function App() {
   const [activeService, setActiveService] = useState<ServiceKey>("MOT");
   const [isFormOpen, setIsFormOpen] = useState(false);
 
-  // Derive strongly-typed keys from the literal list
+  const textRef = useRef<HTMLHeadingElement | null>(null);
+
+  useEffect(() => {
+    new CircleType(textRef.current).radius(420);
+  }, []);
+
   const services = useMemo<ServiceKey[]>(() => [...SERVICE_NAMES], []);
 
   return (
@@ -185,18 +192,22 @@ export default function App() {
               Since 1982 • Portsmouth
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight">
-              Semmens
+            <h1
+              ref={textRef}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-shadow text-[#3a4572] tracking-[0rem] mt-5 sm:mt-10"
+              style={{ fontFamily: "'Old Standard TT', serif" }}
+            >
+              SEMMENS
             </h1>
-            <h2 className="text-lg sm:text-xl md:text-2xl font-black leading-tight">
-              of
-            </h2>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight">
-              Southsea
+            <h2
+              className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl sm:mt-[-10px] md:mt-[-20px] lg:mt-[-30px] text-[#3a4572]  leading-tight tracking-tight font-bold"
+              style={{ fontFamily: "'Old Standard TT', serif" }}
+            >
+              of Southsea
             </h2>
 
-            <p className="mt-3 sm:mt-4 text-base sm:text-lg opacity-80">
-              Motor Engineers
+            <p className="mt-3 sm:mt-4  sm:text-lg md:text-xl lg:text-3xl font-bold text-[#3a4572] lg:tracking-[0.5rem]">
+              MOTOR ENGINEERS
             </p>
 
             <img
@@ -219,10 +230,10 @@ export default function App() {
               aria-hidden="true"
               className="
       pointer-events-none select-none 
-      absolute bottom-[18.5rem] right-[-2rem]
+      absolute bottom-[18.5rem] right-[-2.8rem]
       w-[clamp(200px,45vw,720px)]     
-      md:bottom-[21rem] md:right-[-2.5rem]
-      lg:bottom-[7.5rem] lg:right-[-1.5rem]
+      md:bottom-[21rem] md:right-[-4.5rem]
+      lg:bottom-[7.5rem] lg:right-[-3.5rem]
       object-contain
     "
             />
@@ -239,12 +250,20 @@ export default function App() {
               </a>
             </div>
 
-            <div className="mt-6 sm:mt-8 stats stats-horizontal shadow-lg bg-base-100/70 backdrop-blur scale-100">
+            <div className="mt-6 sm:mt-8 stats stats-horizontal shadow-xl bg-base-100/70 backdrop-blur scale-100">
               <div className="stat px-2 sm:px-4">
                 <div className="stat-title text-xs sm:text-sm">
                   Customer rating
                 </div>
-                <div className="stat-value text-lg sm:text-2xl">4.9⭐</div>
+                <a
+                  href="https://www.google.com/search?sca_esv=67db8545f6bda9c4&sxsrf=AE3TifPc8jKTc85c3tMl7HK8GQbTjxj_mw:1757096031060&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E83CyQ1woFGro85n2fReaq4-3ssyJSYTK7Ng2qWQGQ4CyaIShJ97jjVdXGni4BaUeBGmQcUolW4k3YdQbxDR5_bvIeypCtoKrIuExYo5hPQisnq74g%3D%3D&q=Semmens+Of+Southsea+Reviews&sa=X&ved=2ahUKEwjY55HmnMKPAxWlQUEAHaoaInAQ0bkNegQIOxAE&cshid=1757096048511484&biw=1664&bih=1094&dpr=1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Read our Google reviews (opens in a new tab)"
+                  className="stat-value text-lg sm:text-2xl transform transition-transform duration-200 hover:-translate-y-0.5"
+                >
+                  4.9⭐
+                </a>{" "}
                 <div className="stat-desc text-[10px] sm:text-xs">
                   Local &amp; repeat business
                 </div>
@@ -283,7 +302,7 @@ export default function App() {
               key={s}
               className={classNames(
                 "tab whitespace-nowrap",
-                activeService === s && "tab-active"
+                activeService === s && "tab-active",
               )}
               onClick={() => setActiveService(s)}
             >
@@ -353,77 +372,72 @@ export default function App() {
 
       <section id="why" className="py-16 bg-base-200">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-black tracking-tight">
+          {/* Heading spans full width */}
+          <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-12 text-center">
             Why choose Semmens of Southsea?
           </h2>
 
-        <div className="mt-8 grid md:grid-cols-3 gap-6">
-            <div className="card bg-base-100 shadow-lg">
-              <div className="card-body">
-                <h3 className="card-title">Accurate diagnostics</h3>
-                <p className="opacity-80">
-                  We use the latest tools to pinpoint issues quickly—saving you
-                  time and money.
-                </p>
-                <div
-                  className="mt-4 radial-progress"
-                  style={{ "--value": 100 } as CSSVar}
-                  role="progressbar"
-                  aria-label="Diagnostic accuracy"
-                >
-                  100%
-                </div>
-              </div>
-            </div>
+          {/* 2-column layout */}
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left column: image */}
+            <img
+              src="garage.jpg"
+              alt="Our garage at Semmens of Southsea"
+              className="rounded-lg shadow-xl w-full"
+            />
 
-            <div className="card bg-base-100 shadow-lg">
-              <div className="card-body">
-                <h3 className="card-title">Clear &amp; fair pricing</h3>
-                <p className="opacity-80">
-                  Estimates given up-front, with your approval before any work
-                  begins.
-                </p>
-                <ul className="mt-3 steps steps-vertical md:steps-horizontal">
-                  <li className="step step-secondary">Inspection</li>
-                  <li className="step step-secondary">Estimate</li>
-                  <li className="step">Approval</li>
-                  <li className="step">Repair</li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="card bg-base-100 shadow-lg">
-              <div className="card-body">
-                <h3 className="card-title">Trusted parts &amp; service</h3>
-                <p className="opacity-80">
-                  We only use quality OEM or equivalent parts, keeping your
-                  vehicle safe and warranty intact.
-                </p>
-                <div className="join mt-4">
-                  <div className="badge join-item badge-outline">OEM</div>
-                  <div className="badge join-item badge-outline">
-                    DVSA Approved
-                  </div>
-                  <div className="badge join-item badge-outline">
-                    Warranty Safe
+            {/* Right column: cards */}
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="card bg-base-100 shadow-lg">
+                <div className="card-body">
+                  <h3 className="card-title">Accurate diagnostics</h3>
+                  <p className="opacity-80">
+                    We use the latest tools to pinpoint issues quickly—saving
+                    you time and money.
+                  </p>
+                  <div
+                    className="mt-4 radial-progress"
+                    style={{ "--value": 100 } as CSSVar}
+                    role="progressbar"
+                    aria-label="Diagnostic accuracy"
+                  >
+                    100%
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <div className="mt-10 mockup-window border bg-base-100 shadow-xl">
-            <div className="px-6 py-8">
-              <div className="chat chat-start">
-                <div className="chat-bubble">
-                  “Booked in for an MOT and was back on the road the same day.
-                  Clear advice, no stress—couldn’t ask for better service.”
+              <div className="card bg-base-100 shadow-lg">
+                <div className="card-body">
+                  <h3 className="card-title">Clear &amp; fair pricing</h3>
+                  <p className="opacity-80">
+                    Estimates given up-front, with your approval before any work
+                    begins.
+                  </p>
+                  <ul className="mt-3 steps steps-vertical md:steps-horizontal">
+                    <li className="step step-secondary">Inspection</li>
+                    <li className="step step-secondary">Estimate</li>
+                    <li className="step">Approval</li>
+                    <li className="step">Repair</li>
+                  </ul>
                 </div>
               </div>
-              <div className="chat chat-end">
-                <div className="chat-bubble chat-bubble-secondary">
-                  That’s exactly what we aim for—straightforward, same-day
-                  service to keep you driving with confidence.
+
+              <div className="card bg-base-100 shadow-lg md:col-span-2">
+                <div className="card-body">
+                  <h3 className="card-title">Trusted parts &amp; service</h3>
+                  <p className="opacity-80">
+                    We only use quality OEM or equivalent parts, keeping your
+                    vehicle safe and warranty intact.
+                  </p>
+                  <div className="join mt-4">
+                    <div className="badge join-item badge-outline">OEM</div>
+                    <div className="badge join-item badge-outline">
+                      DVSA Approved
+                    </div>
+                    <div className="badge join-item badge-outline">
+                      Warranty Safe
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -444,7 +458,7 @@ export default function App() {
                 <p className="text-lg">
                   Phone:{" "}
                   <a href="tel:+44XXXXXXXXXX" className="link link-secondary">
-                    +44 XX XXXX XXXX
+                    023 9281 6610
                   </a>
                 </p>
                 <p className="text-lg">
@@ -523,4 +537,3 @@ export default function App() {
     </>
   );
 }
-
