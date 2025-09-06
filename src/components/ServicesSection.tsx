@@ -12,7 +12,6 @@ const SERVICE_NAMES = [
 
 type ServiceKey = (typeof SERVICE_NAMES)[number];
 
-// Store copy as JSX
 const SERVICE_CONTENT: Record<ServiceKey, ReactNode> = {
   MOT: (
     <>
@@ -22,12 +21,14 @@ const SERVICE_CONTENT: Record<ServiceKey, ReactNode> = {
         carry out a quick pre-check to highlight any obvious issues that might
         cause a fail.
       </p>
+      <br />
       <p>
         During the test, we inspect brakes, lights, steering, suspension,
         emissions, and structural integrity. If advisories are raised, we’ll
         explain them clearly without jargon, so you know exactly what they mean
         for your car.
       </p>
+      <br />
       <p>
         Should your vehicle fail, we offer same-day retests where possible once
         the issue is corrected, helping you get back on the road quickly and
@@ -42,6 +43,7 @@ const SERVICE_CONTENT: Record<ServiceKey, ReactNode> = {
         We provide both interim and full servicing to keep your vehicle safe,
         efficient, and reliable.
       </p>
+      <br />
 
       <p className="font-semibold">Interim service typically includes:</p>
       <ul className="list-disc pl-6">
@@ -81,11 +83,13 @@ const SERVICE_CONTENT: Record<ServiceKey, ReactNode> = {
         from routine fixes like brakes and clutches to more complex jobs such as
         alternators, starter motors, radiators, and cooling systems.
       </p>
+      <br />
       <p>
         We use up-to-date diagnostic tools and proven repair techniques to get
         the job done properly the first time. Before any work begins, we’ll give
         you a clear, itemised quote with no hidden extras.
       </p>
+      <br />
       <p>
         If additional issues are discovered during repair, we’ll contact you
         first to discuss options and costs, so you’re always in control of the
@@ -101,12 +105,14 @@ const SERVICE_CONTENT: Record<ServiceKey, ReactNode> = {
         budget and driving need, whether you’re after premium, mid-range, or
         economy options.
       </p>
+      <br />
       <p>
         Our technicians check tread depth, wear patterns, and pressures to
         ensure safety and performance. We also handle puncture repairs (where
         safe to do so), valve replacements, and tyre pressure monitoring system
         (TPMS) servicing, including diagnostics and resets.
       </p>
+      <br />
       <p>
         Wheel balancing is included with every tyre fitted, and we can also
         advise on wheel alignment to extend tyre life and improve handling.
@@ -120,11 +126,13 @@ const SERVICE_CONTENT: Record<ServiceKey, ReactNode> = {
         Modern vehicles rely on complex electronic systems, and our advanced
         diagnostic equipment allows us to go beyond simply reading fault codes.
       </p>
+      <br />
       <p>
         We access live data streams to see how sensors and components are
         behaving in real time, allowing us to pinpoint root causes rather than
         just symptoms.
       </p>
+      <br />
       <p>
         After analysis, we provide a clear, jargon-free report that explains
         what’s wrong, why it’s happening, and the best repair options. This
@@ -141,11 +149,13 @@ const SERVICE_CONTENT: Record<ServiceKey, ReactNode> = {
         system, from shocks, springs, and bushings to ball joints, track rods,
         and anti-roll bars.
       </p>
+      <br />
       <p>
         If your car feels unstable, pulls to one side, or makes knocking noises,
         these components are often the cause. Our team checks geometry and
         alignment to ensure tyres wear evenly and handling stays precise.
       </p>
+      <br />
       <p>
         By restoring your suspension to its proper condition, we help improve
         safety, ride comfort, and fuel efficiency. We’ll always explain the
@@ -194,8 +204,22 @@ const ICONS: Record<ServiceKey, JSX.Element> = {
   ),
   Tyres: (
     <svg viewBox="0 0 24 24" className="w-6 h-6">
-      <circle cx="12" cy="12" r="7" className="stroke-current" fill="none" strokeWidth="1.5" />
-      <circle cx="12" cy="12" r="2" className="stroke-current" fill="none" strokeWidth="1.5" />
+      <circle
+        cx="12"
+        cy="12"
+        r="7"
+        className="stroke-current"
+        fill="none"
+        strokeWidth="1.5"
+      />
+      <circle
+        cx="12"
+        cy="12"
+        r="2"
+        className="stroke-current"
+        fill="none"
+        strokeWidth="1.5"
+      />
     </svg>
   ),
   "Engine Diagnostics": (
@@ -227,157 +251,6 @@ function classNames(...v: Array<string | false | null | undefined>) {
   return v.filter((x): x is string => Boolean(x)).join(" ");
 }
 
-/**
- * Pricing data — “from” prices keep things realistic; you can tweak later.
- * GBP and VAT assumed. Small print and badges included for clarity.
- */
-type PriceKey =
-  | "MOT"
-  | "Interim Service"
-  | "Full Service"
-  | "Diagnostics"
-  | "Repairs Labour"
-  | "Tyres"
-  | "Wheel Alignment";
-
-type PriceItem = {
-  key: PriceKey;
-  label: string;
-  from: string;           // e.g. "£45"
-  unit?: string;          // e.g. "per hour", "per tyre", "front axle"
-  includes?: string[];    // bullet list under the price
-  notes?: string;         // short one-liner under bullets
-  badge?: string;         // small top-right tag
-  ctaText?: string;
-};
-
-const PRICING: PriceItem[] = [
-  {
-    key: "MOT",
-    label: "MOT (Class 4)",
-    from: "£45",
-    notes: "Free retest when repairs are completed with us*",
-    badge: "Popular",
-    ctaText: "Book MOT",
-  },
-  {
-    key: "Interim Service",
-    label: "Interim Service",
-    from: "£129",
-    includes: [
-      "Oil & filter",
-      "Top-up essential fluids",
-      "Brake, tyre & safety checks",
-      "Digital service record update (where supported)",
-    ],
-    ctaText: "Book Interim",
-  },
-  {
-    key: "Full Service",
-    label: "Full Service",
-    from: "£199",
-    includes: [
-      "All interim items",
-      "Air/pollen/fuel filters (where required)",
-      "Plugs (vehicle-dependent)",
-      "Comprehensive inspection & report",
-    ],
-    badge: "Best value",
-    ctaText: "Book Full Service",
-  },
-  {
-    key: "Diagnostics",
-    label: "Engine Diagnostics",
-    from: "£60",
-    unit: "initial assessment",
-    notes: "Diagnostic fee deducted if you approve repair*",
-    ctaText: "Book Diagnostics",
-  },
-  {
-    key: "Repairs Labour",
-    label: "Repairs Labour",
-    from: "£75",
-    unit: "per hour",
-    notes: "Fixed-price quotes provided before work",
-    ctaText: "Get a Quote",
-  },
-  {
-    key: "Tyres",
-    label: "Tyres (fitted & balanced)",
-    from: "£55",
-    unit: "per tyre",
-    notes: "Economy 195/65 R15 example — sizes/brands vary",
-    ctaText: "Check Stock",
-  },
-  {
-    key: "Wheel Alignment",
-    label: "Wheel Alignment",
-    from: "£49",
-    unit: "front axle",
-    notes: "Four-wheel alignment quoted after inspection",
-    ctaText: "Book Alignment",
-  },
-];
-
-function PricingSection() {
-  return (
-    <section id="pricing" className="py-16 container mx-auto px-4">
-      <div className="flex items-end justify-between gap-4">
-        <h2 className="text-3xl md:text-4xl font-black tracking-tight">Pricing</h2>
-      </div>
-
-      <p className="opacity-80 mt-3 max-w-3xl">
-        Transparent, upfront pricing. Many jobs depend on vehicle model and condition, so we publish “from” prices below and
-        confirm a firm quote after a quick check.
-      </p>
-
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {PRICING.map((p) => (
-          <div key={p.key} className="relative border border-base-300 bg-base-100 shadow-xl rounded-lg overflow-hidden">
-            {p.badge && (
-              <div className="absolute right-3 top-3 badge badge-secondary">{p.badge}</div>
-            )}
-            <div className="p-6">
-              <h3 className="text-xl font-bold">{p.label}</h3>
-              <div className="mt-2">
-                <span className="text-3xl font-extrabold">{p.from}</span>
-                <span className="opacity-70 ml-2">{p.unit ? ` ${p.unit}` : " starting from"}</span>
-              </div>
-
-              {p.includes && p.includes.length > 0 && (
-                <ul className="mt-4 list-disc pl-6">
-                  {p.includes.map((i, idx) => (
-                    <li key={idx}>{i}</li>
-                  ))}
-                </ul>
-              )}
-
-              {p.notes && <p className="mt-3 text-sm opacity-75">{p.notes}</p>}
-
-              {p.ctaText && (
-                <div className="mt-6">
-                  <a href={"#contact"} className="btn btn-secondary w-full">
-                    {p.ctaText}
-                  </a>
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-6 text-xs opacity-70 space-y-1">
-        <p>
-          *Retest and diagnostic fee policies apply when repairs are completed by us; details confirmed at booking.
-        </p>
-        <p>
-          Prices include VAT. Parts/prices may vary by vehicle and specification. We’ll always confirm exact costs before work begins.
-        </p>
-      </div>
-    </section>
-  );
-}
-
 export default function ServicesSection() {
   const [activeService, setActiveService] = useState<ServiceKey>("MOT");
   const services = useMemo<ServiceKey[]>(() => [...SERVICE_NAMES], []);
@@ -386,14 +259,19 @@ export default function ServicesSection() {
     <>
       <section id="services" className="py-16 container mx-auto px-4">
         <div className="flex items-end justify-between gap-4">
-          <h2 className="text-3xl md:text-4xl font-black tracking-tight">Services</h2>
+          <h2 className="text-3xl md:text-4xl font-black tracking-tight">
+            Services
+          </h2>
         </div>
 
         <div className="mt-6 tabs tabs-boxed overflow-x-auto w-full">
           {services.map((s) => (
             <button
               key={s}
-              className={classNames("tab whitespace-nowrap", activeService === s && "tab-active")}
+              className={classNames(
+                "tab whitespace-nowrap",
+                activeService === s && "tab-active",
+              )}
               onClick={() => setActiveService(s)}
             >
               <span className="mr-2">{ICONS[s]}</span>
@@ -411,16 +289,20 @@ export default function ServicesSection() {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-2xl font-bold break-words">{activeService}</h3>
+                  <h3 className="text-2xl font-bold break-words">
+                    {activeService}
+                  </h3>
 
-                  <div className="opacity-80 mt-1 max-w-3xl prose break-words">
+                  <div className="opacity-80 mt-1 prose break-words">
                     {SERVICE_CONTENT[activeService]}
                   </div>
 
                   <div className="mt-4 flex flex-wrap gap-2">
                     <span className="badge badge-outline">OEM-spec parts</span>
                     <span className="badge badge-outline">Clear pricing</span>
-                    <span className="badge badge-outline">Same-day when possible</span>
+                    <span className="badge badge-outline">
+                      Same-day when possible
+                    </span>
                   </div>
 
                   <div className="mt-6 flex flex-wrap gap-3 min-w-0">
@@ -443,9 +325,6 @@ export default function ServicesSection() {
           </div>
         </div>
       </section>
-
-      <PricingSection />
     </>
   );
 }
-

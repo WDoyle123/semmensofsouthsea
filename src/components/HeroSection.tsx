@@ -15,25 +15,25 @@ export default function HeroSection() {
     >
       <div className="hero-content w-full px-4 sm:px-6 md:px-8 text-center">
         <div className="mx-auto max-w-xl sm:max-w-2xl">
-          <div className="badge badge-secondary mb-3 sm:mb-4">
+          <div className="pointer-events-none select-none badge badge-secondary mb-3 sm:mb-4">
             Since 1982 • Portsmouth
           </div>
 
           <h1
             ref={textRef}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-shadow text-[#3a4572] tracking-[0rem] mt-5 sm:mt-10"
+            className="pointer-events-none select-none text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-shadow text-[#3a4572] tracking-[0rem] mt-5 sm:mt-10"
             style={{ fontFamily: "'Old Standard TT', serif" }}
           >
             SEMMENS
           </h1>
           <h2
-            className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl sm:mt-[-10px] md:mt-[-20px] lg:mt-[-30px] text-[#3a4572] leading-tight tracking-tight font-bold"
+            className="pointer-events-none select-none text-3xl sm:text-3xl md:text-4xl lg:text-6xl sm:mt-[-10px] md:mt-[-20px] lg:mt-[-30px] text-[#3a4572] leading-tight tracking-tight font-bold"
             style={{ fontFamily: "'Old Standard TT', serif" }}
           >
             of Southsea
           </h2>
 
-          <p className="mt-3 sm:mt-4  sm:text-lg md:text-xl lg:text-3xl font-bold text-[#3a4572] lg:tracking-[0.5rem]">
+          <p className="pointer-events-none select-none mt-3 sm:mt-4 sm:text-lg md:text-xl lg:text-3xl font-bold text-[#3a4572] lg:tracking-[0.5rem]">
             MOTOR ENGINEERS
           </p>
 

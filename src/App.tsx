@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import ServicesSection from "./components/ServicesSection";
+import PricingSection from "./components/PricingSection";
 import WhyChooseSection from "./components/WhyChooseSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
@@ -12,6 +13,7 @@ export default function App() {
       <Navbar />
       <HeroSection />
       <ServicesSection />
+      <PricingSection />
       <WhyChooseSection />
       <ContactSection />
       <Footer />
