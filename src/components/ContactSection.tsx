@@ -16,7 +16,7 @@ export default function ContactSection() {
             <div className="card-body">
               <h3 className="card-title">Get in touch</h3>
               <p className="text-lg">
-                Phone: <a href="tel:+44XXXXXXXXXX" className="link link-secondary">023 9281 6610</a>
+                Phone: <a href="tel:02392816610" className="link link-secondary">023 9281 6610</a>
               </p>
               <p className="text-lg">
                 Email: <a href="mailto:info@semmensofsouthsea.co.uk" className="link link-secondary">info@semmensofsouthsea.co.uk</a>

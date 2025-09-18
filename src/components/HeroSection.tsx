@@ -60,16 +60,13 @@ export default function HeroSection() {
       absolute bottom-[18.5rem] right-[-2.8rem]
       w-[clamp(200px,45vw,720px)]
       md:bottom-[21rem] md:right-[-4.5rem]
-      lg:bottom-[7.5rem] lg:right-[-3.5rem]
+      lg:bottom-[7.5rem] lg:right-[-6.5rem]
       object-contain
     "
           />
 
           <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
-            <a
-              href="#services"
-              className="btn btn-secondary w-full sm:w-auto"
-            >
+            <a href="#services" className="btn btn-secondary w-full sm:w-auto">
               Explore services
             </a>
             <a href="#contact" className="btn btn-outline w-full sm:w-auto">
@@ -77,7 +74,7 @@ export default function HeroSection() {
             </a>
           </div>
 
-          <div className="mt-6 sm:mt-8 stats stats-horizontal shadow-xl bg-base-100/70 backdrop-blur scale-100">
+          <div className="mt-6 sm:mt-8 stats stats-horizontal shadow-lg bg-base-100/70 backdrop-blur scale-100">
             <div className="stat px-2 sm:px-4">
               <div className="stat-title font-bold text-xs sm:text-sm">
                 Customer rating
@@ -114,11 +111,15 @@ export default function HeroSection() {
               </div>
             </div>
           </div>
+          <div className="mt-8">
+            <div className="pointer-events-none select-none badge badge-ghost text-xs sm:text-sm px-3 py-2">
+              2 Furness Rd, Southsea, Portsmouth, Southsea PO5 2JL
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-base-100 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24" />
     </section>
   );
 }
-

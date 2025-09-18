@@ -3,7 +3,7 @@ import type { JSX, ReactNode } from "react";
 
 const SERVICE_NAMES = [
   "MOT",
-  "Services",
+  "Servicing",
   "Repairs",
   "Tyres",
   "Engine Diagnostics",
@@ -37,7 +37,7 @@ const SERVICE_CONTENT: Record<ServiceKey, ReactNode> = {
     </>
   ),
 
-  Services: (
+  Servicing: (
     <>
       <p>
         We provide both interim and full servicing to keep your vehicle safe,
@@ -179,7 +179,7 @@ const ICONS: Record<ServiceKey, JSX.Element> = {
       />
     </svg>
   ),
-  Services: (
+  Servicing: (
     <svg viewBox="0 0 24 24" className="w-6 h-6">
       <path
         d="M4 7h16M4 12h16M4 17h16"
@@ -260,7 +260,7 @@ export default function ServicesSection() {
       <section id="services" className="py-16 container mx-auto px-4">
         <div className="flex items-end justify-between gap-4">
           <h2 className="text-3xl md:text-4xl font-black tracking-tight">
-            Services
+           Solutions 
           </h2>
         </div>
 
