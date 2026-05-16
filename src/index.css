@@ -56,3 +56,8 @@ body {
   scrollbar-width: thin;
   scrollbar-color: #1f2940 transparent;
 }
+
+@keyframes letterIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
