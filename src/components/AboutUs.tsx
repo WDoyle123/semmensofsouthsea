@@ -7,6 +7,7 @@ const highlights = [
   "OEM-spec parts & manufacturer-approved oils",
   "Clear, jargon-free advice — no surprises",
 ];
+const garageImageSrc = `${import.meta.env.BASE_URL}garage.jpg`;
 
 function AboutUs() {
   return (
@@ -29,7 +30,7 @@ function AboutUs() {
               style={{ width: "100%", aspectRatio: "4 / 5" }}
             >
               <img
-                src="/garage.jpg"
+                src={garageImageSrc}
                 alt="Inside the Semmens of Southsea workshop"
                 loading="lazy"
                 decoding="async"
