@@ -1,24 +1,44 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import CircleType from "circletype";
 import { motion } from "framer-motion";
 
+const MOBILE_LOGO_QUERY = "(max-width: 640px)";
+
 type Props = {
   fontSize?: number;
+  mobileFontSize?: number;
   color?: string;
   accentColor?: string;
 };
 
 export default function SemmensLogo({
   fontSize = 72,
+  mobileFontSize = 52,
   color = "#f7f4ee",
   accentColor = "#e89b3c",
 }: Props) {
   const semmensRef = useRef<HTMLHeadingElement>(null);
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== "undefined" && window.matchMedia(MOBILE_LOGO_QUERY).matches,
+  );
+  const effectiveFontSize = isMobile ? mobileFontSize : fontSize;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const mediaQuery = window.matchMedia(MOBILE_LOGO_QUERY);
+    const handleChange = () => setIsMobile(mediaQuery.matches);
+
+    handleChange();
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
   useEffect(() => {
     if (!semmensRef.current) return;
 
-    const ct = new CircleType(semmensRef.current).radius(fontSize * 5.5);
+    const ct = new CircleType(semmensRef.current).radius(effectiveFontSize * 5.5);
 
     // Set spans to opacity 0 *before* revealing the container,
     // so the curved layout is already in place when it becomes visible.
@@ -33,7 +53,7 @@ export default function SemmensLogo({
     semmensRef.current.style.opacity = "1";
 
     return () => ct.destroy();
-  }, [fontSize]);
+  }, [effectiveFontSize]);
 
   return (
     <div className="flex flex-col items-center select-none pointer-events-none">
@@ -42,7 +62,7 @@ export default function SemmensLogo({
         className="font-bold"
         style={{
           fontFamily: "'Old Standard TT', serif",
-          fontSize,
+          fontSize: effectiveFontSize,
           color,
           lineHeight: 1,
           letterSpacing: "0.12em",
@@ -60,9 +80,9 @@ export default function SemmensLogo({
         className="font-bold italic"
         style={{
           fontFamily: "'Old Standard TT', serif",
-          fontSize: fontSize * 0.64,
+          fontSize: effectiveFontSize * 0.64,
           color: accentColor,
-          marginTop: fontSize * -0.20,
+          marginTop: effectiveFontSize * -0.20,
           letterSpacing: "0.06em",
         }}
       >
@@ -75,9 +95,9 @@ export default function SemmensLogo({
         className="font-bold"
         style={{
           fontFamily: "'Old Standard TT', serif",
-          fontSize: fontSize * 0.24,
+          fontSize: effectiveFontSize * 0.24,
           color: accentColor,
-          marginTop: fontSize * 0.20,
+          marginTop: effectiveFontSize * 0.20,
           letterSpacing: "0.06em",
         }}
       >

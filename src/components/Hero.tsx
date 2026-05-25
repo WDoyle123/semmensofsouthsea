@@ -42,7 +42,7 @@ function Hero() {
       >
         {/* Curved logo */}
         <div>
-          <SemmensLogo fontSize={72} />
+          <SemmensLogo fontSize={72} mobileFontSize={52} />
         </div>
 
         {/* Divider */}
