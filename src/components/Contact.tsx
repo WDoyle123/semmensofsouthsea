@@ -24,10 +24,14 @@ const contactDetails = [
 
 function FormSkeleton() {
   return (
-    <div className="p-6 space-y-4 animate-pulse">
-      {Array.from({ length: 6 }).map((_, i) => (
-        <div key={i} className="h-24 w-full bg-white/15 rounded-xl" />
-      ))}
+    <div className="absolute inset-0 z-10 p-6 space-y-4 animate-pulse pointer-events-none">
+      <div className="h-38 w-full bg-white/15 rounded-xl" />
+      <div className="h-38 w-full bg-white/15 rounded-xl" />
+      <div className="h-38 w-full bg-white/15 rounded-xl" />
+      <div className="h-38 w-full bg-white/15 rounded-xl" />
+      <div className="h-38 w-full bg-white/15 rounded-xl" />
+      <div className="h-38 w-full bg-white/15 rounded-xl" />
+      <div className="h-38 w-full bg-white/15 rounded-xl" />
     </div>
   );
 }
@@ -201,7 +205,7 @@ function Contact() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="relative w-full max-w-xl bg-navy-dark rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-white/20 pointer-events-auto"
+                className="relative w-full max-w-xl bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-white/20 pointer-events-auto"
                 style={{
                   height: "min(95dvh, 95vh)",
                   maxHeight: "min(95dvh, 95vh)",
@@ -224,14 +228,14 @@ function Contact() {
                   </button>
                 </div>
 
-                <div className="flex-1 overflow-y-auto relative bg-white">
+                <div className="relative flex-1 min-h-0 overflow-hidden">
                   {!iframeLoaded && <FormSkeleton />}
                   <motion.iframe
+                    className="block h-full w-full bg-white"
                     src="https://docs.google.com/forms/d/e/1FAIpQLSei7rKBh4t3GboTNexsA0d0eeWjjFYYQVAytM66y-X5-tTYtg/viewform?embedded=true"
                     width="100%"
-                    height="1600"
                     frameBorder="0"
-                    scrolling="no"
+                    scrolling="yes"
                     marginHeight={0}
                     marginWidth={0}
                     title="Contact Form"
@@ -239,7 +243,6 @@ function Contact() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: iframeLoaded ? 1 : 0 }}
                     transition={{ duration: 0.5 }}
-                    style={{ display: "block" }}
                   >
                     Loading…
                   </motion.iframe>
