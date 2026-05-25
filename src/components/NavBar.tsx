@@ -3,9 +3,8 @@ import { motion, useScroll } from "framer-motion";
 import { Menu, Phone, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Services", href: "#pricing" },
-  { label: "Pricing", href: "#pricing" },
   { label: "About", href: "#about" },
+  { label: "Pricing", href: "#pricing" },
   { label: "Reviews", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];
