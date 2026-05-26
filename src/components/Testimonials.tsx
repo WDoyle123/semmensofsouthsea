@@ -1,27 +1,34 @@
 import { motion } from "framer-motion";
-import { Quote } from "lucide-react";
+import { ArrowUpRight, Quote } from "lucide-react";
 
-const testimonials = [
+type Testimonial = {
+  quote: string;
+  reviewUrl: string;
+  name: string;
+  initials: string;
+};
+
+const testimonials: Testimonial[] = [
   {
     quote:
-      "Honest, friendly and reasonably priced. I've been bringing my cars here for years and wouldn't go anywhere else in Portsmouth.",
-    name: "Sarah M.",
-    role: "Southsea",
-    initials: "SM",
+      "Luke and his team are honest, trustworthy and reliable. They all work incredibly hard whilst delivering results that are always outstanding.",
+    reviewUrl: "https://share.google/LQgvF4iXI79T8aaTU",
+    name: "Leah S.",
+    initials: "LS",
   },
   {
     quote:
-      "Great communication — they explained exactly what was wrong, gave a clear quote, and the car was ready the same day. Highly recommended.",
-    name: "David R.",
-    role: "Eastney",
-    initials: "DR",
+      "Have been going to Semmens for all car related fixes for a number of years now! I have always received a friendly and professional service from Luc and his team. Would highly recommend - even now I live further away, I still wouldn't take my car anywhere else!",
+    reviewUrl: "https://share.google/7Sk9nhRjRqQLM8SMw",
+    name: "B S.",
+    initials: "BS",
   },
   {
     quote:
-      "A proper old-school garage in the best possible way. Skilled mechanics, fair prices, and they actually take the time to talk you through everything.",
-    name: "Emma T.",
-    role: "Old Portsmouth",
-    initials: "ET",
+      "I recently took my car to Semmens for its MOT and service, as they were recommended by my sister and dad and I’m super happy I did! Luke and his team were really helpful, friendly and kind and I felt full trust with them. Even though my car required a few repairs, it’s a great feeling to be able to drive away knowing my car is safe to use and was in good hands. I’ll be glad to go back there whenever I should need their help again :)",
+    reviewUrl: "https://share.google/pZW7wP1EW5Er7U6TB",
+    name: "Emma B.",
+    initials: "EB",
   },
 ];
 
@@ -44,10 +51,7 @@ const cardVariants = {
 
 function Testimonials() {
   return (
-    <section
-      id="testimonials"
-      className="py-24 px-6 bg-white overflow-hidden"
-    >
+    <section id="testimonials" className="py-24 px-6 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -77,26 +81,35 @@ function Testimonials() {
           viewport={{ once: true, margin: "-80px" }}
           className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
-          {testimonials.map((t, i) => (
+          {testimonials.map((testimonial) => (
             <motion.div
-              key={i}
+              key={testimonial.reviewUrl}
               variants={cardVariants}
               whileHover={{ y: -6, transition: { duration: 0.25 } }}
               className="relative bg-cream border border-cream-dark rounded-2xl p-8 flex flex-col gap-6"
             >
               <Quote size={28} className="text-amber" />
               <p className="text-gray-700 text-base leading-relaxed flex-1">
-                “{t.quote}”
+                “{testimonial.quote}”
               </p>
+              <a
+                href={testimonial.reviewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Read full Google review from ${testimonial.name}`}
+                className="inline-flex w-fit items-center gap-2 text-navy-dark hover:text-amber-dark text-sm font-semibold transition-colors duration-200 underline underline-offset-2"
+              >
+                Read full review
+                <ArrowUpRight size={16} aria-hidden="true" />
+              </a>
               <div className="flex items-center gap-4 pt-2 border-t border-cream-dark">
                 <div className="w-10 h-10 rounded-full bg-navy-dark flex items-center justify-center text-cream text-sm font-bold shrink-0">
-                  {t.initials}
+                  {testimonial.initials}
                 </div>
                 <div>
                   <p className="text-navy-dark text-sm font-semibold">
-                    {t.name}
+                    {testimonial.name}
                   </p>
-                  <p className="text-gray-500 text-xs">{t.role}</p>
                 </div>
               </div>
             </motion.div>
@@ -111,19 +124,7 @@ function Testimonials() {
             className="inline-flex items-center gap-2 text-navy-dark hover:text-amber-dark text-sm font-semibold transition-colors"
           >
             Read all reviews on Google
-            <svg
-              className="w-3.5 h-3.5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-              />
-            </svg>
+            <ArrowUpRight size={14} aria-hidden="true" />
           </a>
         </div>
       </div>
